@@ -1,5 +1,6 @@
 package com.vti.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,9 +24,14 @@ import lombok.Setter;
 @Builder
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements Serializable {
 	
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

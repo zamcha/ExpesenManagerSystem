@@ -4,9 +4,9 @@ import com.vti.entity.Wallet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface WalletRepository extends JpaRepository<Wallet, Long> {
+public interface WalletRepository extends JpaRepository<Wallet, Long>, JpaSpecificationExecutor<Wallet> {
 
-    // Lấy ví của 1 user (có phân trang)
-    Page<Wallet> findByUserId(Long userId, Pageable pageable);
+	Page<Wallet> findByOwner_Id(Long userId, Pageable pageable);
 }

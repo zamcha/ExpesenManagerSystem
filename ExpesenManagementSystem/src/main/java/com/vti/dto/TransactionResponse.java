@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TransactionResponse {
     private Long id;
+    private String userFullName;
     private String type;
     private BigDecimal amount;
     private LocalDateTime occurredAt;

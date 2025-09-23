@@ -9,8 +9,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class WalletResponse {
     private Long id;
+    private String ownerFullName;
     private String name;
     private String currency;
     private BigDecimal balance;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

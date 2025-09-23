@@ -1,8 +1,10 @@
 package com.vti.entity;
 
-
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,45 +30,52 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Transaction {
+public class Transaction implements Serializable {
 
-    public enum Type {
-        INCOME, EXPENSE, TRANSFER
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	public enum Type {
+		INCOME, EXPENSE, TRANSFER
+	}
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "wallet_id", nullable = false)
-    private Wallet wallet;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "wallet_id", nullable = false)
+	private Wallet wallet;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private Category category;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
-    private Type type;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id")
+	private Category category;
 
-    @Column(nullable = false, precision = 18, scale = 2)
-    private BigDecimal amount;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 10)
+	private Type type;
 
-    @Column(name = "occurred_at", nullable = false)
-    private LocalDateTime occurredAt;
+	@Column(nullable = false, precision = 18, scale = 2)
+	private BigDecimal amount;
 
-    @Column(length = 1000)
-    private String note;
+	@Column(name = "occurred_at", nullable = false)
+	private LocalDateTime occurredAt;
 
-    @Column(length = 255)
-    private String location;
+	@Column(length = 1000)
+	private String note;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
+	@Column(length = 255)
+	private String location;
+
+	@Column(name = "created_at")
+	@CreationTimestamp
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
+	private LocalDateTime deletedAt;
 }
